@@ -5,6 +5,7 @@ type TokenType string
 const (
 	ILLEGAL = "ILLEGAL"
 	EOF = "EOF"
+	IDENTIFIER = "IDENTIFIER"
 	//Punctuators
 	LBRACE = "{"
 	RBRACE = "}"
@@ -121,6 +122,79 @@ const (
 	NUMBER = "NUMBER"
 	STRING = "STRING"
 )
+
+var keywords = map[string]TokenType {
+	//Keywords
+	"break": BREAK,
+	"case": CASE, 
+	"catch": CATCH,
+	"continue": CONTINUE,
+	"default": DEFAULT,
+	"delete": DELETE,
+	"do": DO,
+	"else": ELSE,
+	"finally": FINALLY,
+	"for": FOR,
+	"function": FUNCTION,
+	"if": IF,
+	"in": IN,
+	"instanceof": INSTANCEOF,
+	"new": NEW,
+	"return": RETURN,
+	"switch": SWITCH,
+	"this": THIS,
+	"throw": THROW,
+	"try": TRY,
+	"typeof": TYPEOF,
+	"var": VAR,
+	"void": VOID,
+	"do": WHILE,
+	"with": WITH,
+	//Future reserved words
+	"abstract": ABSTRACT,
+	"boolean": BOOLEAN,
+	"byte": BYTE,
+	"char": CHAR,
+	"class": CLASS,
+	"const": CONST,
+	"debugger": DEBUGGER,
+	"double": DOUBLE,
+	"enum": ENUM,
+	"export": EXPORT,
+	"extends": EXTENDS,
+	"final": FINAL,
+	"float": FLOAT,
+	"goto": GOTO,
+	"implements": IMPLEMENTS,
+	"import": IMPORT,
+	"int": INT,
+	"interface": INTERFACE,
+	"long": LONG,
+	"native": NATIVE,
+	"package": PACKAGE,
+	"private": PRIVATE,
+	"protected": PROTECTED,
+	"public": PUBLIC,
+	"short": SHORT,
+	"static": STATIC,
+	"super": SUPER,
+	"synchronized": SYNCHRONIZED,
+	"throws": THROWS,
+	"transient": TRANSIENT,
+	"volatile": VOLATILE,
+	//Literals 
+	"true": TRUE,
+	"false": FALSE,
+	"null": NULL,
+	"undefined": UNDEFINED,
+}
+
+func FindIdent(ident string) TokenType {
+	if token, ok := keywords[ident]; ok {
+		return token 
+	}
+	return IDENTIFIER
+}
 type Token struct {
 	Type TokenType
 	Literal string
