@@ -207,6 +207,14 @@ func (lex *Lexer) NextToken() token.Token {
 		} else {
 			tok = newToken(token.STAR, lex.character)
 		}
+	case '/':
+		if lex.getNextCharacter() == '=' {
+			formerCharacter := lex.character
+			lex.setNextCharacter()
+			tok = token.Token{Type: token.DIVASSIGN, Literal: string(formerCharacter) + string(lex.character)}
+		} else {
+			tok = newToken(token.DIV, lex.character)
+		}
 	}
 	lex.setNextCharacter()
 	return tok
