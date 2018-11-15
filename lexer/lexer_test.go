@@ -15,7 +15,7 @@ func TestNextToken(t *testing.T) {
 		if (true) {
 			Param1
 		} else {
-			return array[0] <<= 4 || 1 > 2
+			return array[0] <<= "'4'" || 1 > 2
 		}
 	}
 	return _z >>>= 15.9`
@@ -79,7 +79,11 @@ func TestNextToken(t *testing.T) {
 		{token.NUMBER, "0"},
 		{token.RBRACK, "]"},
 		{token.LTLTASSIGN, "<<="},
+		{token.QUOTEQUOTE, "\""},
+		{token.QUOTE, "'"},
 		{token.NUMBER, "4"},
+		{token.QUOTE, "'"},
+		{token.QUOTEQUOTE, "\""},
 		{token.OROR, "||"},
 		{token.NUMBER, "1"},
 		{token.GT, ">"},
