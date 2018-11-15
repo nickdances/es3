@@ -10,8 +10,8 @@ type Lexer struct {
 	character byte
 }
 //New takes a string and returns a lexer.
-func New(input string) Lexer {
-	lex := Lexer{input: input}
+func New(input string) *Lexer {
+	lex := &Lexer{input: input}
 	lex.setNextCharacter()
 	return lex
 }
