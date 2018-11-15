@@ -9,6 +9,7 @@ const (
 	NEWLINE = "\n"
 	QUOTE = "'"
 	QUOTEQUOTE = "\""
+	BACKSLASH = "\\"
 	//Punctuators
 	LBRACE = "{"
 	RBRACE = "}"

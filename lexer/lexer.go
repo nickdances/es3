@@ -217,11 +217,37 @@ func (lex *Lexer) NextToken() token.Token {
 		} else {
 			tok = newToken(token.DIV, lex.character)
 		}
+	case '\\':
+		if lex.getNextCharacter() == 'n' {
+			lex.setNextCharacter()
+			tok = newToken(token.NEWLINE, '\n')
+		} else if lex.getNextCharacter() == 'r' {
+				lex.setNextCharacter()
+				if lex.getNextCharacter() == '\\' {
+					lex.setNextCharacter()
+					if lex.getNextCharacter() == 'n' {
+						lex.setNextCharacter()
+						tok = newToken(token.NEWLINE, '\n')
+					}
+				} else {
+					tok = newToken(token.NEWLINE, '\n')
+				}
+			} else {
+				tok = newToken(token.BACKSLASH, '\\')	
+			}
 	case '\r':
 		if lex.getNextCharacter() == '\n' {
 			lex.setNextCharacter()
+			tok = newToken(token.NEWLINE, '\n')
+		} else if lex.getNextCharacter() == '\\' {
+			lex.setNextCharacter()
+			if lex.getNextCharacter() == 'n' {
+				lex.setNextCharacter()
+				tok = newToken(token.NEWLINE, '\n')
+			}
+		} else {
+			tok = newToken(token.NEWLINE, '\n')
 		}
-		tok = newToken(token.NEWLINE, '\n')
 	case '\n': 
 		tok = newToken(token.NEWLINE, lex.character)
 	case '\'':
