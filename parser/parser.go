@@ -47,7 +47,45 @@ func (parse *Parser) parseStatement() ast.Statement {
 	switch parse.curToken.Type{
 	case token.VAR:
 		return parse.parseVarStatement()
-	default: 
+	default:
 		return nil
+	}
+}
+
+func (parse *Parser) parseVarStatement() *ast.VarStatement {
+	stmt := &ast.VarStatement{Token: parse.curToken}
+
+	if !parse.nextType(token.IDENTIFIER) {
+		return nil
+	}
+
+	stmt.Name = &ast.Identifier{Token: parse.curToken, Value: parse.curToken.Literal}
+
+	if !parse.nextType(token.ASSIGN) {
+		return nil
+	}
+
+	for !parse.curTokenIs(token.SEMICOLON)  {
+		parse.setNextToken()
+	}
+
+	return stmt
+
+}
+
+func (parse *Parser) curTokenIs(t token.TokenType) bool {
+	return parse.curToken.Type == t
+}
+
+func (parse *Parser) nextTokenIs(t token.TokenType) bool {
+	return parse.nextToken.Type == t
+}
+
+func (parse *Parser) nextType(t token.TokenType) bool {
+	if parse.nextTokenIs(t) {
+		parse.setNextToken()
+		return true
+	} else {
+		return false
 	}
 }
