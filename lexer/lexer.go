@@ -220,17 +220,20 @@ func (lex *Lexer) NextToken() token.Token {
 	case '\\':
 		if lex.getNextCharacter() == 'n' {
 			lex.setNextCharacter()
-			tok = newToken(token.NEWLINE, '\n')
+			tok.Type = token.LINEBREAK
+			tok.Literal = "LINEBREAK"
 		} else if lex.getNextCharacter() == 'r' {
 				lex.setNextCharacter()
 				if lex.getNextCharacter() == '\\' {
 					lex.setNextCharacter()
 					if lex.getNextCharacter() == 'n' {
 						lex.setNextCharacter()
-						tok = newToken(token.NEWLINE, '\n')
+						tok.Type = token.LINEBREAK
+						tok.Literal = "LINEBREAK"
 					}
 				} else {
-					tok = newToken(token.NEWLINE, '\n')
+					tok.Type = token.LINEBREAK
+					tok.Literal = "LINEBREAK"
 				}
 			} else {
 				tok = newToken(token.BACKSLASH, '\\')	
@@ -238,18 +241,22 @@ func (lex *Lexer) NextToken() token.Token {
 	case '\r':
 		if lex.getNextCharacter() == '\n' {
 			lex.setNextCharacter()
-			tok = newToken(token.NEWLINE, '\n')
+			tok.Type = token.LINEBREAK
+			tok.Literal = "LINEBREAK"
 		} else if lex.getNextCharacter() == '\\' {
 			lex.setNextCharacter()
 			if lex.getNextCharacter() == 'n' {
 				lex.setNextCharacter()
-				tok = newToken(token.NEWLINE, '\n')
+				tok.Type = token.LINEBREAK
+				tok.Literal = "LINEBREAK"
 			}
 		} else {
-			tok = newToken(token.NEWLINE, '\n')
+			tok.Type = token.LINEBREAK
+			tok.Literal = "LINEBREAK"
 		}
 	case '\n': 
-		tok = newToken(token.NEWLINE, lex.character)
+		tok.Type = token.LINEBREAK
+		tok.Literal = "LINEBREAK"
 	case '\'':
 		tok = newToken(token.QUOTE, lex.character)
 	case '"':
