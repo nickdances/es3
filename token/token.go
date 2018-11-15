@@ -6,6 +6,9 @@ const (
 	ILLEGAL = "ILLEGAL"
 	EOF = "EOF"
 	IDENTIFIER = "IDENTIFIER"
+	NEWLINE = "\n"
+	QUOTE = "'"
+	QUOTEQUOTE = "\""
 	//Punctuators
 	LBRACE = "{"
 	RBRACE = "}"
@@ -148,7 +151,7 @@ var keywords = map[string]TokenType {
 	"typeof": TYPEOF,
 	"var": VAR,
 	"void": VOID,
-	"do": WHILE,
+	"while": WHILE,
 	"with": WITH,
 	//Future reserved words
 	"abstract": ABSTRACT,

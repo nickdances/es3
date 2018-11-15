@@ -7,33 +7,94 @@ import (
 )
 
 func TestNextToken(t *testing.T) {
-	input := `===[]=={}().;,<>=!?|&+-!=!==`
+	input := `var x = 2
+	var y = 3
+	var _z = (x + y)
+	function (Param1, $param2) {
+		var array = [Param1, $param2];
+		if (true) {
+			Param1
+		} else {
+			return array[0] <<= 4 || 1 > 2
+		}
+	}
+	return _z >>>= 15.9`
 
 	tests := []struct {
 		expectedType token.TokenType
 		expectedLiteral string
 	}{
-		{token.ASSIGNASSIGNASSIGN, "==="},
-		{token.LBRACK, "["},
-		{token.RBRACK, "]"},
-		{token.ASSIGNASSIGN, "=="},
-		{token.LBRACE, "{"},
-		{token.RBRACE, "}"},
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "x"},
+		{token.ASSIGN, "="},
+		{token.NUMBER, "2"},
+		{token.NEWLINE, "\n"},
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "y"},
+		{token.ASSIGN, "="},
+		{token.NUMBER, "3"},
+		{token.NEWLINE, "\n"},
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "_z"},
+		{token.ASSIGN, "="},
 		{token.LPAREN, "("},
-		{token.RPAREN, ")"},
-		{token.DOT, "."},
-		{token.SEMICOLON, ";"},
-		{token.COMMA, ","},
-		{token.LT, "<"},
-		{token.GTASSIGN, ">="},
-		{token.BANG, "!"},
-		{token.QUESTION, "?"},
-		{token.OR, "|"},
-		{token.AND, "&"},
+		{token.IDENTIFIER, "x"},
 		{token.PLUS, "+"},
-		{token.MINUS, "-"},
-		{token.BANGASSIGN, "!="},
-		{token.BANGASSIGNASSIGN, "!=="},
+		{token.IDENTIFIER, "y"},
+		{token.RPAREN, ")"},
+		{token.NEWLINE, "\n"},
+		{token.FUNCTION, "function"},
+		{token.LPAREN, "("},
+		{token.IDENTIFIER, "Param1"},
+		{token.COMMA, ","},
+		{token.IDENTIFIER, "$param2"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.NEWLINE, "\n"},
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "array"},
+		{token.ASSIGN, "="},
+		{token.LBRACK, "["},
+		{token.IDENTIFIER, "Param1"},
+		{token.COMMA, ","},
+		{token.IDENTIFIER, "$param2"},
+		{token.RBRACK, "]"},
+		{token.SEMICOLON, ";"},		
+		{token.NEWLINE, "\n"},
+		{token.IF, "if"},
+		{token.LPAREN, "("},
+		{token.TRUE, "true"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.NEWLINE, "\n"},
+		{token.IDENTIFIER, "Param1"},
+		{token.NEWLINE, "\n"},
+		{token.RBRACE, "}"},
+		{token.ELSE, "else"},
+		{token.LBRACE, "{"},
+		{token.NEWLINE, "\n"},
+		{token.RETURN, "return"},
+		{token.IDENTIFIER, "array"},
+		{token.LBRACK, "["},
+		{token.NUMBER, "0"},
+		{token.RBRACK, "]"},
+		{token.LTLTASSIGN, "<<="},
+		{token.NUMBER, "4"},
+		{token.OROR, "||"},
+		{token.NUMBER, "1"},
+		{token.GT, ">"},
+		{token.NUMBER, "2"},
+		{token.NEWLINE, "\n"},
+		{token.RBRACE, "}"},
+		{token.NEWLINE, "\n"},
+		{token.RBRACE, "}"},
+		{token.NEWLINE, "\n"},
+		{token.RETURN, "return"},
+		{token.IDENTIFIER, "_z"},
+		{token.GTGTGTASSIGN, ">>>="},
+		{token.NUMBER, "15"},
+		{token.DOT, "."},
+		{token.NUMBER, "9"},
 	}
 	
 	l := New(input)
