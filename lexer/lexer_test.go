@@ -8,7 +8,7 @@ import (
 
 func TestNextToken(t *testing.T) {
 	input := `var x = 2
-	var y = 3
+	var 	y = 3
 	var _z = (x + y)
 	function (Param1, $param2) {
 		var array = [Param1, $param2];
