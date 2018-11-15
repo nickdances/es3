@@ -1,5 +1,9 @@
 package ast
 
+import (
+	"es3/token"
+)
+
 type Node interface {
 	TokenLiteral() string
 }
@@ -32,7 +36,7 @@ type VarStatement struct {
 	Value Expression
 }
 
-func (vs *VarStatement) statementNode()
+func (vs *VarStatement) statementNode() {}
 func (vs *VarStatement) TokenLiteral() string { return vs.Token.Literal }
 
 type Identifier struct {
@@ -40,5 +44,5 @@ type Identifier struct {
 	Value string
 }
 
-func (i *Identifier) expressionNode()
+func (i *Identifier) expressionNode() {}
 func (i *Identifier) TokenLiteral() string { return i.Token.Literal }

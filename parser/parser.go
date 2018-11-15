@@ -13,6 +13,20 @@ type Parser struct {
 	nextToken token.Token
 }
 
-func new (lex *lexer.Lexer) *Parser {
+func New (lex *lexer.Lexer) *Parser {
+	parse := &Parser{lex: lex}
 
+	parse.setNextToken()
+	parse.setNextToken()
+
+	return parse
+}
+
+func (parse *Parser) setNextToken() {
+	parse.curToken = parse.nextToken
+	parse.nextToken = parse.lex.NextToken()
+}
+
+func (parse *Parser) ParseProgram() *ast.Program {
+	return nil
 }
