@@ -8,18 +8,26 @@ import (
 
 type Parser struct {
 	lex *lexer.Lexer
+	errors []string
 
 	curToken token.Token
 	nextToken token.Token
 }
 
 func New (lex *lexer.Lexer) *Parser {
-	parse := &Parser{lex: lex}
+	parse := &Parser{
+		lex: lex,
+		errors: []string{},
+	}
 
 	parse.setNextToken()
 	parse.setNextToken()
 
 	return parse
+}
+
+func (parse *Parser) Errors() []string {
+	return parse.errors
 }
 
 func (parse *Parser) setNextToken() {
@@ -31,7 +39,7 @@ func (parse *Parser) ParseProgram() *ast.Program {
 	program := &ast.Program{}
 	program.Statements = []ast.Statement{}
 
-	for parse.curToken.Type != token.EOF {
+	for !parse.curTokenIs(token.EOF) {
 		stmt := parse.parseStatement()
 
 		if stmt != nil {
@@ -65,7 +73,7 @@ func (parse *Parser) parseVarStatement() *ast.VarStatement {
 		return nil
 	}
 
-	for !parse.curTokenIs(token.SEMICOLON)  {
+	for !parse.curTokenIs(token.SEMICOLON) && !parse.curTokenIs(token.LINEBREAK)  {
 		parse.setNextToken()
 	}
 
