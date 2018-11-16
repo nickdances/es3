@@ -32,8 +32,8 @@ func (parse *Parser) Errors() []string {
 	return parse.errors
 }
 
-func (parse *Parser) nextError(t token.TokenType) {
-	msg := fmt.Sprintf("expected token %s, got error %s", t, parse.nextToken.Type)
+func (parse *Parser) setError(t token.TokenType) {
+	msg := fmt.Sprintf("want token %s, have token %s", t, parse.nextToken.Type)
 	parse.errors = append(parse.errors, msg)
 }
 
@@ -101,6 +101,7 @@ func (parse *Parser) nextType(t token.TokenType) bool {
 		parse.setNextToken()
 		return true
 	} else {
+		parse.setError(t)
 		return false
 	}
 }

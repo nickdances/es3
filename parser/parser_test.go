@@ -9,7 +9,7 @@ import (
 
 func TestVarStatements(t *testing.T) {
 	input := `
-	var x = 5;
+	var x 5;
 	var y = 10;
 	var $_foobar = 34692;
 	`
@@ -50,10 +50,10 @@ func checkParserErrors(t *testing.T, parse *Parser) {
 		return 
 	}
 
-	test.Errorf("found %d parser errors:", len(errors))
+	t.Errorf("found %d parser errors:", len(errors))
 
 	for _, msg := range errors {
-		test.Errorf("%q", msg)
+		t.Errorf("%q", msg)
 	}
 	t.FailNow()
 }
