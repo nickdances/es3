@@ -43,6 +43,36 @@ func TestVarStatements(t *testing.T) {
 	}
 }
 
+func TestReturnStatements(t *testing.T) {
+	input := `
+	return 5;
+	return x;
+	return 3 + 2;
+	`
+
+	lex := lexer.New(input)
+	parse := New(lex)
+
+	program := parse.ParseProgram()
+	checkParserErrors(t, parse)
+
+	if len(program.Statements) != 3{
+		t.Fatalf("have %d want 3 program statements", len(program.Statements))
+	}
+
+	for _, stmt := range program.Statements {
+		//type assertion; statement should be a pointer to a ReturnStatement
+		returnStmt, ok := stmt.(*ast.ReturnStatement)
+		if !ok {
+			t.Errorf("have %T want type *ast.ReturnStatement", stmt)
+			continue
+		}
+		if returnStmt.TokenLiteral() != "return" {
+			t.Errorf("have literal %q want literal 'return'", returnStmt.TokenLiteral())
+		}
+	}
+}
+
 func checkParserErrors(t *testing.T, parse *Parser) {
 	errors := parse.Errors()
 
