@@ -3,11 +3,12 @@ package ast
 import (
 	"es3/token"
 )
-
+//Node provides a method to return token literals.
 type Node interface {
+	//TokenLiteral will typically return Token{Literal: string}
 	TokenLiteral() string
 }
-
+//Statement 
 type Statement interface {
 	Node
 	statementNode()
@@ -21,7 +22,7 @@ type Expression interface {
 type Program struct {
 	Statements []Statement
 }
-
+//TokenLiteral method to satisfy Node interface
 func (program *Program) TokenLiteral() string {
 	if len(program.Statements) > 0 {
 		return program.Statements[0].TokenLiteral()

@@ -1,6 +1,8 @@
 package parser
 
 import (
+	"fmt"
+	
 	"es3/ast"
 	"es3/lexer"
 	"es3/token"
@@ -17,7 +19,7 @@ type Parser struct {
 func New (lex *lexer.Lexer) *Parser {
 	parse := &Parser{
 		lex: lex,
-		errors: []string{},
+		errors: []string{},	
 	}
 
 	parse.setNextToken()
@@ -28,6 +30,11 @@ func New (lex *lexer.Lexer) *Parser {
 
 func (parse *Parser) Errors() []string {
 	return parse.errors
+}
+
+func (parse *Parser) nextError(t token.TokenType) {
+	msg := fmt.Sprintf("expected token %s, got error %s", t, parse.nextToken.Type)
+	parse.errors = append(parse.errors, msg)
 }
 
 func (parse *Parser) setNextToken() {

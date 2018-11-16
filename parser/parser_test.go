@@ -18,6 +18,8 @@ func TestVarStatements(t *testing.T) {
 	parse := New(lex)
 
 	program := parse.ParseProgram()
+	checkParserErrors(t, parse)
+	
 	if program == nil {
 		t.Fatalf("have (nil), want (program)")
 	}
@@ -39,6 +41,21 @@ func TestVarStatements(t *testing.T) {
 			return
 		}
 	}
+}
+
+func checkParserErrors(t *testing.T, parse *Parser) {
+	errors := parse.Errors()
+
+	if len(errors) == 0 {
+		return 
+	}
+
+	test.Errorf("found %d parser errors:", len(errors))
+
+	for _, msg := range errors {
+		test.Errorf("%q", msg)
+	}
+	t.FailNow()
 }
 
 func testVarStatement(t *testing.T, s ast.Statement, name string) bool {
