@@ -6,8 +6,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/nicholasgriffen/es3-repl/lexer"
-	"github.com/nicholasgriffen/es3-repl/token"
+	"github.com/nicholasgriffen/es3/lexer"
+	"github.com/nicholasgriffen/es3/token"
 )
 //Start reads lines in and writes tokens out
 func Start(in io.Reader, out io.Writer) {
