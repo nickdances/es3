@@ -3,8 +3,8 @@ package parser
 import (
 	"testing"
 
-	"es3/ast"
-	"es3/lexer"
+	"github.com/nicholasgriffen/es3-repl/ast"
+	"github.com/nicholasgriffen/es3-repl/lexer"
 )
 
 func TestVarStatements(t *testing.T) {
