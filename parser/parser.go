@@ -3,9 +3,9 @@ package parser
 import (
 	"fmt"
 	
-	"es3/ast"
-	"es3/lexer"
-	"es3/token"
+	"github.com/nicholasgriffen/es3-repl/ast"
+	"github.com/nicholasgriffen/es3-repl/lexer"
+	"github.com/nicholasgriffen/es3-repl/token"
 )
 
 type Parser struct {
