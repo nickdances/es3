@@ -1,7 +1,7 @@
 package lexer 
 
 import (
-	"es3/token"
+	"github.com/nicholasgriffen/es3-repl/token"
 )
 
 type Lexer struct {
