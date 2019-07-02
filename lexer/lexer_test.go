@@ -3,7 +3,7 @@ package lexer
 import (
 	"testing"
 
-	"es3/token"
+	"github.com/nicholasgriffen/es3/token"
 )
 
 func TestNextToken(t *testing.T) {
