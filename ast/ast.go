@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"github.com/nicholasgriffen/es3-repl/token"
+	"github.com/nicholasgriffen/es3/token"
 )
 //Node provides a method to return token literals.
 type Node interface {
