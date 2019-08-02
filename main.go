@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/user"
-	"github.com/nicholasgriffen/es3-repl/repl"
+	"github.com/nicholasgriffen/es3/repl"
 )
 
 func main() {
